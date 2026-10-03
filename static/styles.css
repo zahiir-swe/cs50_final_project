@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Yellowtail&display=swap');
+:root{
+    --primary: #5b419e;
+    --secondary: #3F1D95;
+    --dark: #050006;
+    --light: #FCE7FF;
+    --gray: #939393;
+    --glass: linear-gradient(to right, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+}
+*{
+    margin: 0;
+    padding: 0;
+    color: var(--light);
+    font-family: Poppins, sans-serif;
+    list-style: none;
+    text-decoration: none;
+    font-size: 1.05em;
+}
+body{
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    background-color: var(--dark);
+}
+
+/* SIDEBAR */
+
+nav{
+    position: relative;
+    min-height: 100dvh;
+    margin: 15px 25px; 
+    display: flex;
+    flex-direction: column;
+    gap: 1.1em;
+    border: 1px solid var(--gray);
+    border-radius: 25px;
+    background: linear-gradient(to top, var(--primary), var(--secondary));
+    padding: 1.2em; 
+}
+nav::after{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 25px;
+    width: 25px;
+    background: #FCE7FF;
+    border-radius: 5em;
+}
+p.logo{
+    font-size: 3.5em;
+    font-family: Yellowtail;
+    color: var(--light);
+}
+nav .navlinks{
+    display: flex;
+    flex-direction: column;
+    gap: .7em;
+    padding-right: 2em;
+}
+nav .navlinks .navlink{
+    display: flex;
+    align-items: center;
+    gap: .6em;
+    color: var(--gray);
+    font-weight: 500;
+    padding: .6em 1.1em; 
+    border-radius: 15px;
+}
+nav .navlinks .navlink.active{
+    background-color: var(--primary);
+}
+
+/* MAIN */
+
+h1{
+    font-size: 3em;
+}
+p{
+    color: var(--gray); 
+    font-weight: 600;
+}
+span{
+    color: var(--primary);
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayyoub : {% block title%}{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+    
+    <nav>
+        <p class="logo">
+            Ayyoub
+        </p>
+        <div class="navlinks">
+            
+            <div class="navlink active">
+                <i class="fa-solid fa-house"></i>
+                <a href="#">Compétences</a>
+            </div>
+            <div class="navlink">
+                <i class="fa-solid fa-house"></i>
+                <a href="#">Compétences</a>
+            </div>
+            <div class="navlink">
+                <i class="fa-solid fa-house"></i>
+                <a href="#">Compétences</a>
+            </div>
+            <div class="navlink">
+                <i class="fa-solid fa-house"></i>
+                <a href="#">Compétences</a>
+            </div>
+            
+            
+        </div>
+    </nav>
+
+    <main>
+        {% block main %}
+
+        {% endblock%}
+    </main>
+
+</body>
+</html>
