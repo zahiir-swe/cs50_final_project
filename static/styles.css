@@ -1,84 +1,311 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Yellowtail&display=swap');
-:root{
+:root {
+    --accent: #AE9AD5;
     --primary: #5b419e;
     --secondary: #3F1D95;
     --dark: #050006;
     --light: #FCE7FF;
-    --gray: #939393;
+    --gray: #767676;
     --glass: linear-gradient(to right, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+
+    --gap: 1rem;
+    --ease: cubic-bezier(.4, 0, .2, 1);
+
+    /* Sidebar */
+    --sidebar-w: 320px;
+    --nav-pad: .75rem;
+    --link-pad-x: 1.1rem;
+    --icon-w: 1.5rem;
+    --sidebar-w-collapsed: calc(2px + var(--nav-pad) * 2 + var(--link-pad-x) * 2 + var(--icon-w));
+
+    --radius: 15px
 }
-*{
+
+/* RESET */
+*, *::before, *::after {
     margin: 0;
     padding: 0;
-    color: var(--light);
-    font-family: Poppins, sans-serif;
-    list-style: none;
-    text-decoration: none;
-    font-size: 1.05em;
+    box-sizing: border-box;
 }
-body{
+
+body {
     display: flex;
-    justify-content: space-between;
-    align-items: stretch;
+    min-height: 100dvh;
+    font-family: Poppins, sans-serif;
+    font-size: 1.05rem;
+    color: var(--light);
     background-color: var(--dark);
 }
 
-/* SIDEBAR */
+a {
+    color: inherit;
+    text-decoration: none;
+}
 
-nav{
-    position: relative;
-    min-height: 100dvh;
-    margin: 15px 25px; 
+button {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: 0;
+    cursor: pointer;
+}
+
+/* SIDEBAR */
+nav {
+    position: sticky;
+    top: var(--gap);
+    align-self: flex-start;
+    flex-shrink: 0;
+    width: var(--sidebar-w);
+    height: calc(100dvh - var(--gap) * 2);
+    margin: var(--gap);
+    padding: var(--nav-pad);
     display: flex;
     flex-direction: column;
-    gap: 1.1em;
+    gap: 1.1rem;
     border: 1px solid var(--gray);
     border-radius: 25px;
     background: linear-gradient(to top, var(--primary), var(--secondary));
-    padding: 1.2em; 
+    overflow: hidden;
+    transition: width .3s var(--ease);
 }
-nav::after{
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 25px;
-    width: 25px;
-    background: #FCE7FF;
-    border-radius: 5em;
+
+nav.closed {
+    width: var(--sidebar-w-collapsed);
 }
-p.logo{
-    font-size: 3.5em;
-    font-family: Yellowtail;
-    color: var(--light);
-}
-nav .navlinks{
-    display: flex;
-    flex-direction: column;
-    gap: .7em;
-    padding-right: 2em;
-}
-nav .navlinks .navlink{
+
+.nav-header {
     display: flex;
     align-items: center;
-    gap: .6em;
-    color: var(--gray);
-    font-weight: 500;
-    padding: .6em 1.1em; 
-    border-radius: 15px;
+    justify-content: space-between;
+    min-height: 4.5rem;              /* évite le "saut" quand le logo disparaît */
+    padding: 0 var(--link-pad-x);
 }
-nav .navlinks .navlink.active{
-    background-color: var(--primary);
+
+.logo {
+    width: 12rem;            
+    overflow: hidden;
+    white-space: nowrap;
+    font-family: Yellowtail, cursive;
+    font-size: 3rem;
+    line-height: 1.4;
+    transition: max-width .3s var(--ease), opacity .2s;
+}
+
+nav.closed .logo {
+    max-width: 0;
+    opacity: 0;
+}
+
+.toggle {
+    flex-shrink: 0;
+    width: var(--icon-w);
+}
+
+.navlinks {
+    display: flex;
+    flex-direction: column;
+    gap: .7rem;
+}
+
+.navlink {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    padding: .6rem var(--link-pad-x);
+    border-radius: 15px;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: background .2s;
+}
+
+.navlink:hover,
+.navlink.active {
+    background: var(--primary);
+}
+
+.navlink i {
+    flex-shrink: 0;
+    width: var(--icon-w);
+    text-align: center;
+}
+
+.navlink span {
+    transition: opacity .2s;
+}
+
+nav.closed .navlink span {
+    opacity: 0;
 }
 
 /* MAIN */
+main {
+    flex: 1;
+    margin: var(--gap);
+    padding: clamp(1rem, 3vw, 3rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(2rem, 5vw, 6rem);
+}
+.left-main{
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 40rem;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1rem, 2.5vw, 1.75rem);
+}
+.right-main {
+    flex: 0 1 clamp(14rem, 30vw, 28rem);
+    display: flex;
+    justify-content: center;
+}
 
-h1{
-    font-size: 3em;
+h1 {
+    font-size: clamp(2rem, 1.2rem + 3vw, 3.5rem);
+    line-height: 1.15;
 }
-p{
-    color: var(--gray); 
-    font-weight: 600;
+
+main p {
+    max-width: 60ch;
+    font-size: clamp(.95rem, .9rem + .3vw, 1.1rem);
+    line-height: 1.7;
+    color: var(--gray);
 }
-span{
-    color: var(--primary);
+
+h1 span {
+    background: linear-gradient(to bottom, var(--accent), var(--primary));
+    color: transparent;
+    background-clip: text;
+    --webkit-backgroud-clip: text;
+}
+
+#illustration {
+    width: 100%;
+    height: auto;
+}
+.ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+}
+.cta{
+    padding: .7em 1.2em;
+    border : 1px solid var(--gray);
+    border-radius: var(--radius);
+    color: var(--light);
+    font-weight: bold;
+    background-color: var(--primary);
+    margin-right: 12px;
+    transition: .2s;
+}
+.cta1:hover{
+    background-color: #4e3392;
+    transition: .2s;
+}
+.cta2{
+    border: 1px solid var(--accent);
+    background: none;
+    color: var(--accent);
+}
+.cta2:hover{
+    background: #1a1919;
+    transition: .2s;
+}
+
+@media (max-width: 1024px) {
+    main {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .left-main {
+        flex: none;
+        width: 100%;
+        align-items: center;
+    }
+
+    .right-main {
+        order: -1;                          /* l'illustration passe au-dessus du texte */
+        flex: none;
+        width: clamp(12rem, 45vw, 18rem);
+    }
+
+    .ctas {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+
+    :root {
+        --bottom-bar-h: 4.25rem;
+    }
+
+    /* La sidebar devient une barre flottante en bas */
+    nav,
+    nav.closed {
+        position: fixed;
+        top: auto;
+        left: var(--gap);
+        right: var(--gap);
+        bottom: calc(var(--gap) + env(safe-area-inset-bottom));
+        width: auto;
+        height: var(--bottom-bar-h);
+        margin: 0;
+        padding: .4rem;
+        border-radius: 22px;
+        flex-direction: row;
+        z-index: 100;
+        transition: none;
+    }
+
+    /* Le logo et le burger ne servent plus */
+    .nav-header {
+        display: none;
+    }
+
+    .navlinks {
+        flex: 1;
+        flex-direction: row;
+        gap: .25rem;
+    }
+
+    /* Chaque lien : icône au-dessus du texte */
+    .navlink {
+        flex: 1;
+        min-width: 0;
+        flex-direction: column;
+        justify-content: center;
+        gap: .2rem;
+        padding: .3rem;
+        font-size: .7rem;
+        border-radius: 16px;
+    }
+
+    .navlink i {
+        width: auto;
+        font-size: 1.2rem;
+    }
+
+    /* Annule l'effet "texte masqué" de la sidebar réduite */
+    nav.closed .navlink span {
+        opacity: 1;
+    }
+
+    /* Le contenu laisse la place à la barre du bas */
+    main {
+        flex-direction: column;
+        gap: 2rem;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    #illustration {
+        order: -1;                 /* l'illustration passe au-dessus du texte */
+        width: min(260px, 70%);
+    }
 }

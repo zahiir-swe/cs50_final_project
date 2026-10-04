@@ -2,45 +2,48 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ayyoub : {% block title%}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0  viewport-fit=cover">
+    <title>Ayyoub : {% block title %}{% endblock %}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Yellowtail&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="../static/styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    
+
     <nav>
-        <p class="logo">
-            Ayyoub
-        </p>
+        <div class="nav-header">
+            <a class="logo" href="{{ url_for('index') }}">Ayyoub</a>
+            <button id="sidebar-btn" class="toggle" aria-label="Réduire le menu" aria-expanded="true">
+                <i class="fa-solid fa-bars" aria-hidden="true"></i>
+            </button>
+        </div>
+
         <div class="navlinks">
-            
-            <div class="navlink active">
-                <i class="fa-solid fa-house"></i>
-                <a href="#">Compétences</a>
-            </div>
-            <div class="navlink">
-                <i class="fa-solid fa-house"></i>
-                <a href="#">Compétences</a>
-            </div>
-            <div class="navlink">
-                <i class="fa-solid fa-house"></i>
-                <a href="#">Compétences</a>
-            </div>
-            <div class="navlink">
-                <i class="fa-solid fa-house"></i>
-                <a href="#">Compétences</a>
-            </div>
-            
-            
+            {% set links = [
+                ('index', 'À propos', 'fa-user'),
+                ('skills', 'Compétences', 'fa-code'),
+                ('projects', 'Projets', 'fa-folder-open'),
+                ('contact', 'Contact', 'fa-envelope')
+            ] %}
+            {% for endpoint, label, icon in links %}
+            <a class="navlink {% if request.endpoint == endpoint %}active{% endif %}"
+               href="{{ url_for(endpoint) }}"
+               title="{{ label }}"
+               {% if request.endpoint == endpoint %}aria-current="page"{% endif %}>
+                <i class="fa-solid {{ icon }}" aria-hidden="true"></i>
+                <span>{{ label }}</span>
+            </a>
+            {% endfor %}
         </div>
     </nav>
 
     <main>
-        {% block main %}
-
-        {% endblock%}
+        {% block main %}{% endblock %}
     </main>
 
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
 </body>
 </html>

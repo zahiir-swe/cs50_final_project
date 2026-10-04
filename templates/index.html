@@ -5,11 +5,25 @@
 {% endblock %}
 
 {% block main %}
-    <h1>Hello World, Je suis <span>Ayyoub.</span></h1>
+<div class="left-main">
+    <h1>Hello World, Je suis <span class="text-gradient">Ayyoub.</span></h1>
     <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-        Dolorum tempora quaerat ducimus deserunt totam debitis magnam 
-        soluta amet sunt harum eum facilis ad assumenda adipisci nostrum, 
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Dolorum tempora quaerat ducimus deserunt totam debitis magnam
+        soluta amet sunt harum eum facilis ad assumenda adipisci nostrum,
         at delectus provident quasi?
     </p>
+
+    <div class="ctas">
+        <a class="cta cta1" href="{{ url_for('skills') }}">Voir mes compétences</a>
+        <a class="cta cta2" href="{{ url_for('projects') }}">Voir mes projets</a>
+    </div>
+</div>
+
+<div class="right-main">
+    <img id="illustration"
+         src="{{ url_for('static', filename='illustration.png') }}"
+         alt="Illustration d'un développeur avec une manette">
+</div>
 {% endblock %}
+
