@@ -1,11 +1,11 @@
 import os 
 import sqlite3
 
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect
 
 app = Flask(__name__)
 
-con = sqlite3.connect("app.db")
+con = sqlite3.connect("app.db", check_same_thread=False)
 cur = con.cursor()
 
 SCHEMA = """
@@ -35,6 +35,20 @@ def skills():
 def projects():
     return render_template("projects.html")
 
-@app.route("/contact")
+@app.route("/contact", methods=["GET", "POST"])
 def contact():
-    return render_template("contact.html")
+
+    if request.method == "GET":
+        return render_template("contact.html")
+
+    name = request.form.get("name")
+    email = request.form.get("email")
+    message = request.form.get("message")
+
+    cur.execute(
+        "INSERT INTO messages (name, mail, message) VALUES (?, ?, ?)",
+        (name, email, message),
+    )
+    con.commit()
+
+    return redirect("/")

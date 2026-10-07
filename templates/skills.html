@@ -5,4 +5,53 @@
 {% endblock %}
 
 {% block main %}
+{% set logos = ['fa-python', 'fa-js', 'fa-html5', 'fa-css3-alt',
+                'fa-git-alt', 'fa-github', 'fa-docker', 'fa-linux'] %}
+
+<div class="skills-layout">                
+    <div class="skills-cards">
+        <div class="card">
+            <h2>Skill</h2>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                Eius ipsum ea voluptas, voluptate quae quasi vel voluptatem 
+                repudiandae iste quaerat, minus fuga cupiditate optio possimus!
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>Skill</h2>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                Eius ipsum ea voluptas, voluptate quae quasi vel voluptatem 
+                repudiandae iste quaerat, minus fuga cupiditate optio possimus!
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>Skill</h2>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                Eius ipsum ea voluptas, voluptate quae quasi vel voluptatem 
+                repudiandae iste quaerat, minus fuga cupiditate optio possimus!
+            </p>
+        </div>
+    </div>
+
+        <div class="logo-scroller" aria-hidden="true">
+        <div class="logo-stage">
+            <div class="logo-track">
+                {% for _ in range(2) %}
+                <div class="logo-group">
+                    {% for logo in logos %}
+                    <div class="logo-item"><i class="fa-brands {{ logo }}"></i></div>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+</div>    
+
 {% endblock %}

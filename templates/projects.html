@@ -1,8 +1,36 @@
 {% extends "layout.html" %}
-
-{% block title %}
-    Projects
-{% endblock %}
+{% block title %}Projets{% endblock %}
 
 {% block main %}
+{% set projects = [
+    {'title': 'Portfolio', 'desc': 'Site personnel avec Flask, SQLite et un front en HTML/CSS/JS vanilla.',
+     'tags': ['Flask', 'SQLite', 'CSS'], 'url': '#'},
+    {'title': 'Projet 2', 'desc': 'Description courte du projet et de ce qu’il apporte.',
+     'tags': ['Python', 'API'], 'url': '#'},
+    {'title': 'Projet 3', 'desc': 'Description courte du projet et de ce qu’il apporte.',
+     'tags': ['JavaScript'], 'url': '#'},
+    {'title': 'Projet 4', 'desc': 'Description courte du projet et de ce qu’il apporte.',
+     'tags': ['HTML', 'CSS'], 'url': '#'}
+] %}
+
+<section class="projects">
+    {% for p in projects %}
+    <article class="project" style="--i: {{ loop.index }}">
+        <span class="project-num" aria-hidden="true"></span>
+
+        <div class="project-body">
+            <h2>{{ p.title }}</h2>
+            <p>{{ p.desc }}</p>
+
+            <ul class="tags">
+                {% for tag in p.tags %}<li>{{ tag }}</li>{% endfor %}
+            </ul>
+
+            <a class="project-link" href="{{ p.url }}">
+                Voir le projet <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+        </div>
+    </article>
+    {% endfor %}
+</section>
 {% endblock %}
